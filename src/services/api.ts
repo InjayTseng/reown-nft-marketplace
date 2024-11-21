@@ -16,11 +16,44 @@ export const formatNumber = (num: number): string => {
   return num.toFixed(2)
 }
 
+const PINATA_GATEWAY = 'https://gateway.pinata.cloud/ipfs'
+const S3_OLD_DOMAIN = 'https://lootex-dev-s3-cdn.imgix.net'
+const S3_NEW_DOMAIN = 'https://lootex-dev.s3.amazonaws.com'
+
+// Handle IPFS URLs
+const formatIpfsUrl = (url: string): string => {
+  if (!url) return url
+  return url
+    .replace(/^ipfs:\/\//, `${PINATA_GATEWAY}/`)
+    .replace(/^ipfs:\/\/ipfs\//, `${PINATA_GATEWAY}/`)
+    .replace(/^https:\/\/gateway.pinata.cloud\/ipfs/, PINATA_GATEWAY)
+    .replace(/^https:\/\/maticpunks.mypinata.cloud\/ipfs/, PINATA_GATEWAY)
+    .replace(/^https:\/\/ipfs.infura.io\/ipfs/, PINATA_GATEWAY)
+    .replace(/^https:\/\/ipfs.moralis.io:2053\/ipfs/, PINATA_GATEWAY)
+    .replace(/^https:\/\/(.*)\.ipfs\.nftstorage\.link/, `${PINATA_GATEWAY}/$1`)
+}
+
+// Handle S3 URLs
+const formatS3Url = (url: string): string => {
+  if (!url) return url
+  if (url.startsWith(S3_OLD_DOMAIN)) {
+    return url.replace(S3_OLD_DOMAIN, S3_NEW_DOMAIN)
+  }
+  return url
+}
+
 export const formatImageUrl = (url: string): string => {
   if (!url || url.trim() === '') return '/placeholder.svg'
+  
   try {
-    new URL(url)
-    return url
+    // First handle IPFS URLs
+    let formattedUrl = formatIpfsUrl(url)
+    // Then handle S3 URLs
+    formattedUrl = formatS3Url(formattedUrl)
+    
+    // Validate URL
+    new URL(formattedUrl)
+    return formattedUrl
   } catch {
     return '/placeholder.svg'
   }
@@ -31,7 +64,7 @@ const getApiDomain = (): string => {
 //   return hostname === 'localhost' || hostname === '127.0.0.1'
 //     ? 'https://dex-v3-api-aws.lootex.dev'
 //     : 'https://v3-api.lootex.io'
-return 'https://dex-v3-api-aws.lootex.dev'
+return 'https://v3-api.lootex.io'
 }
 
 export const fetchHotCollections = async (period = 'today', page = 1): Promise<Collection[]> => {
