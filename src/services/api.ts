@@ -9,6 +9,18 @@ export interface Collection {
   totalTradingCount: number
 }
 
+export const formatNumber = (num: number): string => {
+  if (!num) return '0'
+  if (num >= 1000000) return (num / 1000000).toFixed(2) + 'M'
+  if (num >= 1000) return (num / 1000).toFixed(2) + 'K'
+  return num.toFixed(2)
+}
+
+export const formatImageUrl = (url: string): string => {
+  if (!url) return '/placeholder.svg'
+  return url
+}
+
 const getApiDomain = (): string => {
   const hostname = window.location.hostname
   return hostname === 'localhost' || hostname === '127.0.0.1'
