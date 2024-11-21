@@ -17,15 +17,21 @@ export const formatNumber = (num: number): string => {
 }
 
 export const formatImageUrl = (url: string): string => {
-  if (!url) return '/placeholder.svg'
-  return url
+  if (!url || url.trim() === '') return '/placeholder.svg'
+  try {
+    new URL(url)
+    return url
+  } catch {
+    return '/placeholder.svg'
+  }
 }
 
 const getApiDomain = (): string => {
-  const hostname = window.location.hostname
-  return hostname === 'localhost' || hostname === '127.0.0.1'
-    ? 'https://dex-v3-api-aws.lootex.dev'
-    : 'https://v3-api.lootex.io'
+//   const hostname = window.location.hostname
+//   return hostname === 'localhost' || hostname === '127.0.0.1'
+//     ? 'https://dex-v3-api-aws.lootex.dev'
+//     : 'https://v3-api.lootex.io'
+return 'https://dex-v3-api-aws.lootex.dev'
 }
 
 export const fetchHotCollections = async (period = 'today', page = 1): Promise<Collection[]> => {

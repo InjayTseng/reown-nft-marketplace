@@ -14,6 +14,7 @@ export function CollectionCard({ collection, onClick }: Props) {
           alt={collection.name}
           onError={(e) => {
             const target = e.target as HTMLImageElement
+            target.onerror = null
             target.src = '/placeholder.svg'
           }}
         />
