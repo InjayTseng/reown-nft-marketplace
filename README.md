@@ -96,6 +96,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgments
 
-- Reown SDK Team
+- Reown SDK Team (https://reown.com/)
 - Lootex NFT API Team
 - React and Vite communities

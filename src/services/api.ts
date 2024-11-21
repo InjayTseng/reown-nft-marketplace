@@ -16,9 +16,9 @@ export const formatNumber = (num: number): string => {
   return num.toFixed(2)
 }
 
-const PINATA_GATEWAY = 'https://gateway.pinata.cloud/ipfs'
-const S3_OLD_DOMAIN = 'https://lootex-dev-s3-cdn.imgix.net'
-const S3_NEW_DOMAIN = 'https://lootex-dev.s3.amazonaws.com'
+const PINATA_GATEWAY = import.meta.env.VITE_PINATA_GATEWAY
+const S3_OLD_DOMAIN = import.meta.env.VITE_S3_OLD_DOMAIN
+const S3_NEW_DOMAIN = import.meta.env.VITE_S3_NEW_DOMAIN
 
 // Handle IPFS URLs
 const formatIpfsUrl = (url: string): string => {
