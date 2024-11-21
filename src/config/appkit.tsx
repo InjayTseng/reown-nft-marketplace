@@ -5,22 +5,22 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 
 // Create QueryClient instance
-const queryClient = new QueryClient()
+export const queryClient = new QueryClient()
 
 // Get your project ID from https://cloud.reown.com
-const projectId = 'YOUR_PROJECT_ID'
+const projectId = '419281db8df7a77cd58b235a42ab2168'
 
 const metadata = {
   name: 'Your App Name',
   description: 'Your App Description',
-  url: 'https://yourapp.com', // Replace with your domain
-  icons: ['https://yourapp.com/icon.png'] // Replace with your icon
+  url: 'https://yourapp.com',
+  icons: ['https://yourapp.com/icon.png']
 }
 
 const networks = [mainnet, arbitrum]
 
 // Create Wagmi Adapter
-const wagmiAdapter = new WagmiAdapter({
+export const wagmiAdapter = new WagmiAdapter({
   networks,
   projectId,
   ssr: true
@@ -34,7 +34,7 @@ createAppKit({
   metadata,
   features: {
     email: true,
-    socials: ['google', 'discord', 'github'], // Add/remove social providers as needed
+    socials: ['google', 'discord', 'github'],
     emailShowWallets: true,
     analytics: true
   },

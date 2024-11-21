@@ -1,4 +1,5 @@
 import React from 'react'
+import { ConnectButton } from './ConnectButton'
 
 function Navbar() {
   return (
@@ -10,7 +11,7 @@ function Navbar() {
         <a href="/">Explore</a>
         <a href="/collections">Collections</a>
         <a href="/create">Create</a>
-        <appkit-button />
+        <ConnectButton />
       </div>
     </nav>
   )
